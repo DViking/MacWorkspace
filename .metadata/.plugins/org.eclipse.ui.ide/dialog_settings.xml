@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/d_viking/Documents/Java/TestServer"/>
+		<item value="/Users/d_viking/Documents/Java/TestClient"/>
+		<item value="/Volumes/HP x5000m/TestServer"/>
+		<item value="/Volumes/HP x5000m/TestClient"/>
+	</list>
+	<section name="NewWizardAction">
+	</section>
+</section>

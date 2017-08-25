@@ -1,0 +1,50 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Calendar;
+
+public class MyServerSocket {
+
+	
+//	BufferedReader 用于读入数据流 .readLine()方法  BufferedReader(InputStreamReader(socket.getInputStream()))
+//	PrintWriter 用于写出数据流 .println()方法 PrintWriter(socket.getOutputStream(),true))
+//	String chatRecordsFile;
+
+	public void createFile(String filename, int witch) {
+		File nowPath = new File("");
+		File file = null;
+		if (witch == 1) { 		//if witch = 1, build file in history chat information
+//			chatRecordsFile = nowPath.getAbsoluteFile()+"/historychatinformation";
+			file = new File(nowPath.getAbsoluteFile()+"/historychatinformation",filename);
+		}else if(witch == 2){	//if witch = 2, build file in common files
+//			chatRecordsFile = nowPath.getAbsoluteFile()+"/commonfiles";
+			file = new File(nowPath.getAbsoluteFile()+"/commonfiles",filename);
+			
+		}
+		
+		
+		if(!file.exists()){
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public String getDate() {
+		String date = new String();
+		Calendar today = Calendar.getInstance();
+		date = today.get(Calendar.YEAR) + "-" + today.get(Calendar.MONTH) + "-" +today.get(Calendar.DAY_OF_MONTH);
+		return date;
+
+	}
+
+	public static void main(String[] args) {
+		new MyServerSocket().createFile(new MyServerSocket().getDate(), 1);
+		new ServerListener().start();
+
+	}
+
+}

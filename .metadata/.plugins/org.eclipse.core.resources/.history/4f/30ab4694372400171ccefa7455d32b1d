@@ -1,0 +1,42 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+
+public class MyServerSocket {
+
+	String chatRecordsFile;
+
+	public void createFile(String filename) {
+		File nowPath = new File("");
+		chatRecordsFile = nowPath.getAbsoluteFile()+"/historychatinformation";
+		File file = new File(nowPath.getAbsoluteFile()+"/historychatinformation",filename);
+		
+		if(!file.exists()){
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public String getDate() {
+		String date = new String();
+		Calendar today = Calendar.getInstance();
+		date = today.get(Calendar.YEAR) + "-" + today.get(Calendar.MONTH) + "-" +today.get(Calendar.DAY_OF_MONTH);
+		return date;
+
+	}
+
+	public static void main(String[] args) {
+
+		
+		MyServerSocket myServerSocket = new MyServerSocket();
+		
+		myServerSocket.createFile(new MyServerSocket().getDate());
+		
+		new ServerListener().start();
+
+	}
+
+}

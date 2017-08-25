@@ -1,0 +1,33 @@
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
+
+public class ServerListener extends Thread {
+
+	@Override
+	public void run(){
+
+		try {
+			ServerSocket serverCharSocket = new ServerSocket(12345);	//用于群聊的Socket端口
+//			ServerSocket serverFileSocket = new ServerSocket(12346);		//用于文件的发送和接收
+			while (true) {
+				Socket chatsocket = serverCharSocket.accept();				//群聊用Socket
+//				Socket filesocket = serverFileSocket.accept();			//文件用Socket
+//				JOptionPane.showMessageDialog(null, "已连接到本机12345端口");
+				System.out.println("已连接到本机12345，12346端口");
+
+				ChatSocket cs = new ChatSocket(chatsocket);
+				cs.start();
+				ChatManager.getChatManager().add(cs);
+				
+//				FileSocket fSocket = new FileSocket(filesocket);
+//				fSocket.start();
+			}
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+}
